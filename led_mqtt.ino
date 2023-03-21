@@ -43,10 +43,10 @@ void callback(String top, byte* payload, unsigned int length) {
   }
   Serial.println("Message: ");
   Serial.println(strPayload);
-  if(strPayload[0] == "0") {
-    digitalWrite(LED_BUILTIN, LOW); //OFF 
+  if(strPayload == "0") {
+    digitalWrite(LED_BUILTIN, HIGH); // Writing HIGH turns the LED off. 
   } else {
-    digitalWrite(LED_BUILTIN, HIGH); //ON 
+    digitalWrite(LED_BUILTIN, LOW); // Writing LOW turns the LED on.
   }
   Serial.println();
 }

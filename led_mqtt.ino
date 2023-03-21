@@ -6,8 +6,8 @@ const char[] mqtt_server = "broker.hivemq.com";
 const char[] topic = "IPB/IoT/Class02/RafaelGuimaraes314883/LED";
 unsigned int port = 1883;
 
-const char[] ssid = "";
-const char[] password = "";
+const char[] ssid = "agents";
+const char[] password = "QgC9O8VucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
 
 WiFiClient espClient;
 PubSubClient client(espClient);

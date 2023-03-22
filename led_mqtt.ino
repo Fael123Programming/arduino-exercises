@@ -2,12 +2,12 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
-const char[] mqtt_server = "broker.hivemq.com";
-const char[] topic = "IPB/IoT/Class02/RafaelGuimaraes314883/LED";
+const char* mqtt_server = "broker.hivemq.com";
+const char* topic = "IPB/IoT/Class02/RafaelGuimaraes314883/LED";
 unsigned int port = 1883;
 
-const char[] ssid = "agents";
-const char[] password = "QgC9O8VucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
+const char* ssid = "agents";
+const char* password = "QgC9O8VucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -43,10 +43,11 @@ void callback(String top, byte* payload, unsigned int length) {
   }
   Serial.println("Message: ");
   Serial.println(strPayload);
+  // A polarizacao do LED esta invertida.
   if(strPayload == "0") {
-    digitalWrite(LED_BUILTIN, HIGH); // Writing HIGH turns the LED off. 
+    digitalWrite(LED_BUILTIN, HIGH); //OFF 
   } else {
-    digitalWrite(LED_BUILTIN, LOW); // Writing LOW turns the LED on.
+    digitalWrite(LED_BUILTIN, LOW); //ON 
   }
   Serial.println();
 }

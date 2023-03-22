@@ -43,7 +43,7 @@ void callback(String top, byte* payload, unsigned int length) {
   }
   Serial.println("Message: ");
   Serial.println(strPayload);
-  // A polarizacao do LED esta invertida.
+  // The polarization of the led is reversed.
   if(strPayload == "0") {
     digitalWrite(LED_BUILTIN, HIGH); //OFF 
   } else {

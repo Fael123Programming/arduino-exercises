@@ -2,13 +2,13 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
-const char[] mqtt_server = "broker.hivemq.com";
-const char[] topicLed = "IPB/IoT/Class02/RafaelGuimaraes314883/LED";
-const char[] topicPot = "IPB/IoT/Class02/RafaelGuimaraes314883/Potentiometer";
+const char* mqtt_server = "broker.hivemq.com";
+const char* topicLed = "IPB/IoT/Class02/RafaelGuimaraes314883/LED";
+const char* topicPot = "IPB/IoT/Class02/RafaelGuimaraes314883/Potentiometer";
 unsigned int port = 1883;
 
-const char[] ssid = "agents";
-const char[] password = "QgC9O8VucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
+const char* ssid = "agents";
+const char* password = "QgC9O8VucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -18,8 +18,11 @@ const int Msg_Size = 50;
 char msg[Msg_Size];
 int value = 0;
 
-int read_pot() {
-  return analogRead(A0);
+const char* read_pot() {
+  int ar = analogRead(A0);
+  char *ar_chars;
+  sprintf(ar_chars, "%d", ar);
+  return ar_chars;
 }
 
 void setup_wifi() {
@@ -47,10 +50,11 @@ void callback(String top, byte* payload, unsigned int length) {
   }
   Serial.println("Message: ");
   Serial.println(strPayload);
+  // The polarization of the led is reversed.
   if(strPayload[0] == "0") {
-    digitalWrite(LED_BUILTIN, LOW); //OFF 
+    digitalWrite(LED_BUILTIN, HIGH); //OFF 
   } else {
-    digitalWrite(LED_BUILTIN, HIGH); //ON 
+    digitalWrite(LED_BUILTIN, LOW); //ON 
   }
   Serial.println();
 }

@@ -40,10 +40,12 @@ void callback(String top, byte* payload, unsigned int length) {
   Serial.println(strPayload);
   // LED is ON: window is OPEN;
   // LED is OFF: window is CLOSED.
-  if(strPayload == "CLOSED") {
-    digitalWrite(LED_BUILTIN, HIGH); //OFF 
-  } else if (strPayload == "OPEN") {
-    digitalWrite(LED_BUILTIN, LOW); //ON 
+  if (top == topic) {
+    if(strPayload == "CLOSED") {
+      digitalWrite(LED_BUILTIN, HIGH); //OFF 
+    } else if (strPayload == "OPEN") {
+      digitalWrite(LED_BUILTIN, LOW); //ON 
+    }
   }
   Serial.println();
 }

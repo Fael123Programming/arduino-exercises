@@ -10,20 +10,22 @@ const char* temperatureTopic = "healthMonitoring/patient2/temperature";
 const char* systolicTopic = "healthMonitoring/patient2/bloodPressure/systolic";
 const char* diastolicTopic = "healthMonitoring/patient2/bloodPressure/diastolic";
 const char* heartRateTopic = "healthMonitoring/patient2/heartRate";
-const char* oxigenPercentageTopic = "healthMonitoring/patient2/oxigenPercentage";
+const char* oxygenPercentageTopic = "healthMonitoring/patient2/oxygenPercentage";
 
 const unsigned int port = 1883;
 
-const char* ssid = "agents";
-const char* password = "QgC9O8/V/ucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
-//const char* ssid = "S ROQUE";/
-//const char* password = "s@oR0que2021.";/
+//const char* ssid = "agents";
+//const char* password = "QgC9O8/V/ucAByqvVu5Rruv1zdpqM66cd23KG4ElV7vZiJND580bzYvaHqz5k07G2";
+//const char* ssid = "S ROQUE";
+//const char* password = "s@oR0que2021.";
+const char* ssid = "Rafaela 2";
+const char* password = "rafaela19";
 
 unsigned long currentMillis = 0, lastMillis = 0;
 const unsigned long limit = 5000;
 
 float temp, sysVal, diasVal;
-unsigned int hr, op;  // Heart rate and oxigen percentage.
+unsigned int hr, op;  // Heart rate and oxygen percentage.
 
 const float seedRate = 0.01;
 
@@ -31,7 +33,7 @@ const unsigned int TEMP_MAX = 40, TEMP_MIN = 35;
 const unsigned int SYS_MAX = 180, SYS_MIN = 90;
 const unsigned int DIAS_MAX = 120, DIAS_MIN = 60;
 const unsigned int HEART_RATE_MAX = 250, HEART_RATE_MIN = 40;
-const unsigned int OXIGEN_PERCENTAGE_MAX = 100, OXIGEN_PERCENTAGE_MIN = 80;
+const unsigned int OXYGEN_PERCENTAGE_MAX = 100, OXYGEN_PERCENTAGE_MIN = 80;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -121,7 +123,7 @@ void setup() {
   sysVal = getRandomFloat(SYS_MIN, SYS_MAX);
   diasVal = getRandomFloat(DIAS_MIN, DIAS_MAX);
   hr = getRandomInteger(HEART_RATE_MIN, HEART_RATE_MAX);
-  op = getRandomInteger(OXIGEN_PERCENTAGE_MIN, OXIGEN_PERCENTAGE_MAX);
+  op = getRandomInteger(OXYGEN_PERCENTAGE_MIN, OXYGEN_PERCENTAGE_MAX);
 }
 
 void loop() {
@@ -138,7 +140,7 @@ void loop() {
     client.publish(systolicTopic, encrypt_float(sysVal).c_str());
     client.publish(diastolicTopic, encrypt_float(diasVal).c_str());
     client.publish(heartRateTopic, encrypt_int(hr).c_str());
-    client.publish(oxigenPercentageTopic, encrypt_int(op).c_str());
+    client.publish(oxygenPercentageTopic, encrypt_int(op).c_str());
     lastMillis = currentMillis;
     temp = getRandomFloat(temp * (1.00 - seedRate), temp * (1.00 + seedRate));
     sysVal = getRandomFloat(sysVal * (1.00 - seedRate), sysVal * (1.00 + seedRate));
@@ -165,9 +167,9 @@ void loop() {
         hr = getRandomInteger(HEART_RATE_MIN, HEART_RATE_MAX);
       }
     }
-    if (op > OXIGEN_PERCENTAGE_MAX || op < OXIGEN_PERCENTAGE_MIN) {
+    if (op > OXYGEN_PERCENTAGE_MAX || op < OXYGEN_PERCENTAGE_MIN) {
       if (getRandomInteger(0, 1)) {
-        op = getRandomInteger(OXIGEN_PERCENTAGE_MIN, OXIGEN_PERCENTAGE_MAX);
+        op = getRandomInteger(OXYGEN_PERCENTAGE_MIN, OXYGEN_PERCENTAGE_MAX);
       }
     }
   }
